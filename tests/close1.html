@@ -151,8 +151,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         let rv = navigator.xr.requestSession('immersive-vr', {
             requiredFeatures: ['local-floor'] 
         }).then((session) => {
-        console.log("onRequestSession: after close");
-        window.close();
+          console.log("onRequestSession: after close");
+          window.close();
           navigator.xr.requestSession('immersive-vr', {
             requiredFeatures: ['local-floor'] 
         });

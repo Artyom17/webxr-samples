@@ -29,18 +29,19 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <link rel='icon' type='image/png' sizes='96x96' href='favicon-96x96.png'>
     <link rel='stylesheet' href='css/common.css'>
 
-    <title>Navigation</title>
+    <title>Open-Close</title>
   </head>
   <body>
     <header>
       <details open>
-        <summary>Input Selection</summary>
+        <summary>Open-Close</summary>
         <p>
           This sample demonstrates navigation in WebXR
           <a class="back" href="./">Back</a>
         </p>
         <button id="xr-open1" class="barebones-button">Open 1</button><p>
-        <button id="xr-open2" class="barebones-button">Open 2</button>
+        <button id="xr-open2" class="barebones-button">Open 2</button><p>
+        <button id="xr-open3" class="barebones-button">Open 3</button>
       </details>
     </header>
     <script type="module">
@@ -67,6 +68,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       xrOpen1Btn.addEventListener('click', onButtonOpen1Clicked);
       let xrOpen2Btn = document.getElementById('xr-open2');
       xrOpen2Btn.addEventListener('click', onButtonOpen2Clicked);
+      let xrOpen3Btn = document.getElementById('xr-open3');
+      xrOpen3Btn.addEventListener('click', onButtonOpen3Clicked);
 
       // XR globals.
       //let xrButton = null;
@@ -104,6 +107,9 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       }
       function onButtonOpen2Clicked() {
         window.open("close2.html");
+      }
+      function onButtonOpen3Clicked() {
+        window.open("close3.html");
       }
 
       function initGL() {
