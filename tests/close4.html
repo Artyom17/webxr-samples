@@ -29,20 +29,16 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <link rel='icon' type='image/png' sizes='96x96' href='favicon-96x96.png'>
     <link rel='stylesheet' href='css/common.css'>
 
-    <title>Open-Close</title>
+    <title>Close 4</title>
   </head>
   <body>
     <header>
       <details open>
-        <summary>Open-Close</summary>
+        <summary>Close 4</summary>
         <p>
           This sample demonstrates navigation in WebXR
           <a class="back" href="./">Back</a>
         </p>
-        <button id="xr-open1" class="barebones-button">Open 1</button><p>
-        <button id="xr-open2" class="barebones-button">Open 2</button><p>
-        <button id="xr-open3" class="barebones-button">Open 3</button>
-        <button id="xr-open4" class="barebones-button">Open 4</button>
       </details>
     </header>
     <script type="module">
@@ -65,17 +61,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         let polyfill = new WebXRPolyfill();
       }
 
-      let xrOpen1Btn = document.getElementById('xr-open1');
-      xrOpen1Btn.addEventListener('click', onButtonOpen1Clicked);
-      let xrOpen2Btn = document.getElementById('xr-open2');
-      xrOpen2Btn.addEventListener('click', onButtonOpen2Clicked);
-      let xrOpen3Btn = document.getElementById('xr-open3');
-      xrOpen3Btn.addEventListener('click', onButtonOpen3Clicked);
-      let xrOpen4Btn = document.getElementById('xr-open4');
-      xrOpen4Btn.addEventListener('click', onButtonOpen4Clicked);
-
       // XR globals.
-      //let xrButton = null;
+      let xrButton = null;
       let xrImmersiveRefSpace = null;
       let inlineViewerHelper = null;
 
@@ -89,7 +76,6 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       let boxes = [];
 
       function initXR() {
-      /*
         xrButton = new WebXRButton({
           onRequestSession: onRequestSession,
           onEndSession: onEndSession
@@ -103,19 +89,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
           });
 
           navigator.xr.requestSession('inline').then(onSessionStarted);
-        } */
-      }
-      function onButtonOpen1Clicked() {
-        window.open("close1.html");
-      }
-      function onButtonOpen2Clicked() {
-        window.open("close2.html");
-      }
-      function onButtonOpen3Clicked() {
-        window.open("close3.html");
-      }
-      function onButtonOpen4Clicked() {
-        window.open("close4.html");
+        }
       }
 
       function initGL() {
@@ -169,12 +143,24 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
       function onSessionGranted() {
         console.log("onSessionGranted");
-        //onRequestSession();
+        onRequestSession();
       }
 
       function onRequestSession() {
         console.log("onRequestSession");
-        window.open("close.html");
+        window.close();
+        console.log("onRequestSession: after close");
+        let rv = navigator.xr.requestSession('immersive-vr', {
+            requiredFeatures: ['local-floor'] 
+        }).then((session) => {
+          navigator.xr.requestSession('immersive-vr', {
+            requiredFeatures: ['local-floor'] 
+        });
+          xrButton.setSession(session);
+          session.isImmersive = true;
+          onSessionStarted(session);
+        });
+        return rv;
       }
 
       function onSessionStarted(session) {
@@ -242,7 +228,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
       function onSessionEnded(event) {
         if (event.session.isImmersive) {
-          //xrButton.setSession(null);
+          xrButton.setSession(null);
         }
       }
 
