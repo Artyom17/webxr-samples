@@ -179,7 +179,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       // name of the hash parameter which may be different.
       let gui = new dat.GUI({ autoPlace: false });
       var folderScene = gui.addFolder('Scene options');
-      folderScene.add(cubeSea, 'cubeCount', 4, 14, 1).onFinishChange(
+      folderScene.add(cubeSea, 'cubeCount', 4, 140, 1).onFinishChange(
           getParamSaver('cubeCount', updateCubeSea));
       folderScene.add(cubeSea, 'cubeScale', 0.2, 2.0, 0.05).onFinishChange(
           getParamSaver('cubeScale', updateCubeSea));
@@ -188,7 +188,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       // heavyGpu currently only gets read on startup.
       folderScene.add(cubeSea, 'heavyGpu').onFinishChange(
           getParamSaver('heavyGpu', () => { window.location.reload(false); }));
-      folderScene.add(appSettings, 'simulatedWorkTimeMs', 0, 20, 1).onFinishChange(
+      folderScene.add(appSettings, 'simulatedWorkTimeMs', 0, 200, 1).onFinishChange(
           getParamSaver('workTime'));
       folderScene.open();
 
